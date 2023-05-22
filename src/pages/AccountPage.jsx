@@ -1,8 +1,8 @@
 
-function AcountPage() {
+function AccountPage() {
     return (
         <div>AcountPage</div>
     )
 }
 
-export default AcountPage
+export default AccountPage
