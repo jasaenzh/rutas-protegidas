@@ -21,8 +21,10 @@ function Navigation() {
                         <NavDropdown.Item as={Link} to="/apartments">Apartamento 402</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link as={Link} to="/reservas">Reservas</Nav.Link>
+                    {/* Permisos usuario administrador */}
                     <NavDropdown title="Admin" id="collasible-nav-dropdown">
-                        <NavDropdown.Item as={Link} to="/admin/usuarios">Usuarios</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/admin/usuarios">Administrar Cuentas</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/admin/editar-reserva">Administrar Reservas</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
 

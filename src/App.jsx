@@ -27,7 +27,8 @@ function App() {
     // Viene la respuesta del usuario
     setUser({
       id: 1,
-      name: "Jhony"
+      name: "Jhony",
+      permission: ["administrador"]
     })
   }
 
@@ -46,6 +47,7 @@ function App() {
       }
 
       <Routes>
+        {/* Rutas Publicas */}
         <Route index element={<HomePage />} />
         <Route
           //Nombre de la URL(path) => Cual es la URL que busca desde el navegador
@@ -55,17 +57,26 @@ function App() {
         />
         <Route path="/iniciar-sesion" element={<LoginPage />} />
         <Route path="/registro" element={<RegisterPage />} />
-        <Route path="/cuenta" element={
-          <ProtectedRoute user={user} redirectTo="/iniciar-sesion">
-            <AcountPage />
-          </ProtectedRoute>
-        } />
         <Route path="/apartamentos" element={<Apartments />} />
         <Route path="/apartamento" element={<Apartment />} />
         <Route path="/reservas" element={<BookingsPage />} />
         <Route path="/reserva" element={<BookingPage />} />
-        <Route path="/admin/editar-reserva" element={<EditBookingPage />} />
-        <Route path="/admin/usuarios" element={<UsersPage />} />
+
+        {/* Rutas protegidas si se loguea el usuario */}
+        <Route element={<ProtectedRoute isPermited={user ? true : false} />}>
+          <Route path="/cuenta" element={<AcountPage />} />
+
+          <Route path="/admin/usuarios" element={<UsersPage />} />
+        </Route>
+
+        {/* Rutas Protegidas con Roles */}
+        <Route path="/admin/editar-reserva" element={
+          <ProtectedRoute isPermited={(user ? true : false) && (user.permission.includes('admin'))}>
+            <EditBookingPage />
+          </ProtectedRoute>
+        } />
+
+        {/* Ruta por defecto si escriben cualquier otra cosa */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
